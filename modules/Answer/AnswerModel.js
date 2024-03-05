@@ -1,5 +1,4 @@
 import Realm, { ObjectSchema } from 'realm';
-import Question from '../Question/QuestionModel';
 export const AnswerTable = 'Answer';
 
 export default class Answer extends Realm.Object {
@@ -13,7 +12,7 @@ export default class Answer extends Realm.Object {
     properties: {
       id: 'int',
       answer: 'string',
-      score: 'int'
+      score: 'int',
       question: { type: 'linkingObjects', objectType: 'Question', property: 'answers' },
     },
     primaryKey: 'id',

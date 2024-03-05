@@ -1,5 +1,4 @@
 import Realm, { ObjectSchema } from 'realm';
-import Test from '../Test/TestModel';
 export const ResultTable = 'Result';
 
 export default class Result extends Realm.Object {

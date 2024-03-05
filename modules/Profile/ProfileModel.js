@@ -1,5 +1,4 @@
 import Realm, { ObjectSchema } from 'realm';
-import Test from '../Test/TestModel';
 export const ProfileTable = 'Profile';
 
 export default class Profile extends Realm.Object {
@@ -13,7 +12,7 @@ export default class Profile extends Realm.Object {
     properties: {
       id: 'int',
       score_result: 'int',
-      created_at: 'date'
+      created_at: 'date',
       test: { type: 'linkingObjects', objectType: 'Test', property: 'profiles' },
     },
     primaryKey: 'id',
