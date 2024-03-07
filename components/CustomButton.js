@@ -30,7 +30,7 @@ export const CustomButton = (props) => {
     const textWeight = useMemo(() => {
         switch (props.type) {
             case ButtonType.Primary:
-                return styles.textBold;
+                return styles.textFlat;
 
             case ButtonType.Secondary:
                 return styles.textBold;
@@ -124,6 +124,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderColor:'#A9E0B9',
         borderWidth: 2,
+        marginTop: 20
     },
     buttonLarge: {
         paddingVertical: 100,

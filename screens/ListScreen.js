@@ -4,41 +4,36 @@ import {
     StyleSheet,
     Text,
     View,
+    FlatList,
+    ActivityIndicator,
 } from 'react-native';
 import {ButtonSize, ButtonType, CustomButton} from "../components/CustomButton";
-import {CustomContainer} from "../components/CustomContainer";
+import {testsMock} from "../mocks/TestsMock";
 
 
-export const ListScreen = () => {
+export const ListScreen =() => {
+
+    const testList = testsMock;
+
     return (
     <View style={styles.container}>
-        <CustomContainer>
-      <Text>Скоро здесь будут психологические тесты!</Text>
-        <CustomButton
-            title="Начать"
-            size={ButtonSize.Medium}
-            type={ButtonType.Primary}
-            onPress={() => {
-                console.log('Button pressed')
-            }}
-        />
-        <CustomButton
-            title="Начать"
-            size={ButtonSize.Medium}
-            type={ButtonType.Secondary}
-            onPress={() => {
-                console.log('Button pressed')
-            }}
-        />
-        <CustomButton
-            title="Я не чувствую себя расстроенным, печальным"
-            size={ButtonSize.Medium}
-            type={ButtonType.Flat}
-            onPress={() => {
-                console.log('Button pressed')
-            }}
-        />
-      </CustomContainer>
+        {testList ? (
+            <FlatList
+                data={testList}
+                renderItem={({item}) => (
+                    <CustomButton
+                        title={item.name}
+                        size={ButtonSize.Medium}
+                        type={ButtonType.Primary}
+                        onPress={() => {
+                            console.log(item)
+                        }}
+                    />
+                )}
+            />
+        ) : (
+            <ActivityIndicator />
+        )}
     </View>
   );
 };
@@ -46,10 +41,10 @@ export const ListScreen = () => {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      gap: 15,
       backgroundColor: '#fff',
       alignItems: 'center',
-      justifyContent: 'center',
+      justifyContent: 'flex-start',
       paddingHorizontal: 20,
+      paddingVertical: 20,
     },
   });
