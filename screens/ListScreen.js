@@ -9,11 +9,18 @@ import {
 } from 'react-native';
 import {ButtonSize, ButtonType, CustomButton} from "../components/CustomButton";
 import {testsMock} from "../mocks/TestsMock";
+import {useNavigation} from '@react-navigation/native'
 
 
 export const ListScreen =() => {
 
+    const navigation = useNavigation()
     const testList = testsMock;
+
+
+    const handleTestPress = (testName) => {
+        navigation.navigate('Info', { testName });
+    };
 
     return (
     <View style={styles.container}>
@@ -26,7 +33,7 @@ export const ListScreen =() => {
                         size={ButtonSize.Medium}
                         type={ButtonType.Primary}
                         onPress={() => {
-                            console.log(item)
+                            handleTestPress(item.name)
                         }}
                     />
                 )}
