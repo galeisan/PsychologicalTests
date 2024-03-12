@@ -1,6 +1,30 @@
-import { observer } from "mobx-react";
 import React, { useEffect, useState } from 'react';
-import { Button, StyleSheet, Text, View, TouchableOpacity, TextInput, FlatList, SafeAreaView, ActivityIndicator, ScrollView } from 'react-native';
+import {View} from 'react-native';
+import {useRoute} from "@react-navigation/native";
+import {ButtonSize, ButtonType, CustomButton} from "../components/CustomButton";
 
-export const TestScreen = () => {
+export const TestScreen = ({ navigation }) => {
+    const route = useRoute();
+    const { testName } = route.params;
+
+    useEffect(() => {
+        navigation.setOptions({ title: testName });
+    }, [testName]);
+
+    const handleTestPress = (testName) => {
+        navigation.navigate('Result', { testName });
+    };
+
+    return (
+        <View>
+            <CustomButton
+                title='Результат'
+                size={ButtonSize.Medium}
+                type={ButtonType.Primary}
+                onPress={() => {
+                    handleTestPress(testName)
+                }}
+            />
+        </View>
+    )
 };
