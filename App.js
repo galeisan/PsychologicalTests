@@ -14,7 +14,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name={'List'} component={ListScreen} />
+        <Stack.Screen name={'Психологические тесты'} component={ListScreen} />
         <Stack.Screen name={'Info'} component={InfoScreen} />
         <Stack.Screen name={'Test'} component={TestScreen} />
         <Stack.Screen name={'Result'} component={ResultScreen} />
