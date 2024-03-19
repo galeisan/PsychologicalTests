@@ -6,6 +6,7 @@ import { ResultScreen } from './screens/ResultScreen';
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from "@react-navigation/native";
+import { InitScreen } from './screens/InitScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -13,12 +14,20 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+      <Stack.Screen
+            name='Init'
+            component={InitScreen}
+            options={{
+              headerShown: false,
+            }}
+        />
         <Stack.Screen
             name={'Психологические тесты'}
             component={ListScreen}
             options={{
               headerTitleStyle: styles.headerTitleStyle,
               headerTitleAlign: 'center',
+              headerBackVisible: false
             }}
         />
         <Stack.Screen
@@ -49,6 +58,7 @@ const navigationOptions= (styles) => ( {
     headerTintColor: styles.headerTintColor,
     headerTitleStyle: styles.headerTitleStyle,
     headerTitleAlign: 'center',
+    headerBackTitleVisible: false,
 });
 
 const styles = StyleSheet.create({

@@ -1,7 +1,7 @@
 import Realm, { ObjectSchema } from 'realm';
 export const ProfileTable = 'Profile';
 
-export default class Profile extends Realm.Object {
+export default class ProfileModel extends Realm.Object {
   id
   score_result
   created_at

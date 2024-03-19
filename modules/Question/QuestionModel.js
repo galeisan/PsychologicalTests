@@ -1,7 +1,7 @@
 import Realm, { ObjectSchema } from 'realm';
 export const QuestionTable = 'Question';
 
-export default class Question extends Realm.Object {
+export default class QuestionModel extends Realm.Object {
   id
   question
   test

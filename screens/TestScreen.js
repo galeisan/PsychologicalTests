@@ -6,6 +6,8 @@ import {CustomAnswerButton} from "../components/CustomAnswerButton";
 import { observer } from "mobx-react";
 import { Button, StyleSheet, Text, TouchableOpacity, TextInput,  SafeAreaView, ScrollView } from 'react-native';
 import {testsMock} from "../mocks/TestsMock";
+import { RealmClient } from '../utils/RealmClient';
+import { TestTable } from '../modules/Test/TestModel';
 
 export const TestScreen = ({ navigation }) => {
     const route = useRoute();
@@ -13,6 +15,7 @@ export const TestScreen = ({ navigation }) => {
 
     useEffect(() => {
         navigation.setOptions({ title: testName });
+        //console.log("realm check", RealmClient.objects(TestTable))
     }, [testName]);
 
     const handleTestPress = (testName) => {
