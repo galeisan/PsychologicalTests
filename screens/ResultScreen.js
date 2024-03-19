@@ -9,7 +9,7 @@ import {testsMock} from "../mocks/TestsMock";
 
 export const ResultScreen = ({ navigation }) => {
     const route = useRoute();
-    const { testName } = route.params;
+    const { testName, testId } = route.params;
 
     useEffect(() => {
         navigation.setOptions({ title: testName });
@@ -25,8 +25,8 @@ export const ResultScreen = ({ navigation }) => {
         <View style={styles.container}>
             <CustomContainer>
                 <Text style={styles.title}>Ваш результат:</Text>
-                <Text>{testList[0].results[0].title}</Text>
-                <Text>{testList[0].results[0].description}</Text>
+                <Text>{testList[testId].results[testId].title}</Text>
+                <Text>{testList[testId].results[testId].description}</Text>
                 <CustomButton
                     title={'На главную'}
                     size={ButtonSize.Medium}

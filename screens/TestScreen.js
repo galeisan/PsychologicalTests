@@ -6,38 +6,59 @@ import {CustomAnswerButton} from "../components/CustomAnswerButton";
 import { observer } from "mobx-react";
 import { Button, StyleSheet, Text, TouchableOpacity, TextInput,  SafeAreaView, ScrollView } from 'react-native';
 import {testsMock} from "../mocks/TestsMock";
+import {answersMock} from "../mocks/AnswersMock";
 
 export const TestScreen = ({ navigation }) => {
     const route = useRoute();
-    const { testName } = route.params;
+    const { testName, testId } = route.params;
+    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+    const [isTestComplete, setIsTestComplete] = useState(false);
 
     useEffect(() => {
         navigation.setOptions({ title: testName });
     }, [testName]);
 
-    const handleTestPress = (testName) => {
-        navigation.navigate('Result', { testName });
+    useEffect(() => {
+        console.log(currentQuestionIndex)
+    }, [currentQuestionIndex]);
+
+    useEffect(() => {
+        if(isTestComplete){
+            navigation.navigate('Result', { testName, testId });
+        }
+    }, [isTestComplete]);
+
+    const handleQuestionPress = () => {
+        if (currentQuestionIndex+1 === testsMock[testId].questions.length){
+            setIsTestComplete(true)
+        }
+        if (!isTestComplete){
+            setCurrentQuestionIndex(currentQuestionIndex+1)
+        }
     };
 
     const testList = testsMock;
+    const answersList = answersMock.filter(el => el.test_id === testId);
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>{testList[0].questions[0].text}</Text>
-            {testList ? (
-                <FlatList
-                    data={testList[0].answers}
-                    renderItem={({item}) => (
-                        <CustomAnswerButton
-                            title={item.text}
-                            size={ButtonSize.Medium}
-                            type={ButtonType.Secondary}
-                            onPress={() => {
-                                handleTestPress(testName)
-                            }}
-                        />
-                    )}
-                />
+            {testList && answersList && !isTestComplete ? (
+                <>
+                    <Text style={styles.title}>{testList[testId].questions[currentQuestionIndex].text}</Text>
+                    <FlatList
+                        data={answersList[currentQuestionIndex].answers}
+                        renderItem={({item}) => (
+                            <CustomAnswerButton
+                                title={item.text}
+                                size={ButtonSize.Medium}
+                                type={ButtonType.Secondary}
+                                onPress={() => {
+                                    handleQuestionPress(testName, testId)
+                                }}
+                            />
+                        )}
+                    />
+                </>
             ) : (
                 <ActivityIndicator />
             )}
